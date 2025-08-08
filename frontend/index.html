@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>Learning Coach</h1>
+      <div class="auth-controls" id="auth-controls"></div>
+    </header>
+
+    <main class="grid">
+      <section class="card" id="auth-card">
+        <h2>Sign in</h2>
+        <input id="email" placeholder="Email" />
+        <input id="name" placeholder="Name (for register)" />
+        <input id="password" type="password" placeholder="Password" />
+        <div class="row">
+          <button id="login-btn">Login</button>
+          <button id="register-btn" class="secondary">Register</button>
+        </div>
+        <div id="auth-msg" class="muted"></div>
+      </section>
+
+      <section class="card" id="summary-card" style="display:none;">
+        <h2>Overview</h2>
+        <div class="kpis">
+          <div class="kpi"><span id="kpi-goals">0</span><label>Goals</label></div>
+          <div class="kpi"><span id="kpi-resources">0</span><label>Resources</label></div>
+          <div class="kpi"><span id="kpi-minutes">0</span><label>Minutes</label></div>
+        </div>
+        <canvas id="progressChart" height="140"></canvas>
+      </section>
+
+      <section class="card" id="goals-card" style="display:none;">
+        <h2>Goals</h2>
+        <div class="row">
+          <input id="goal-title" placeholder="New goal title" />
+          <button id="add-goal-btn">Add Goal</button>
+        </div>
+        <ul id="goals-list"></ul>
+      </section>
+
+      <section class="card" id="resources-card" style="display:none;">
+        <h2>Resources</h2>
+        <div class="row">
+          <input id="res-title" placeholder="Title" />
+          <input id="res-url" placeholder="URL" />
+          <button id="add-res-btn">Add</button>
+        </div>
+        <div class="row">
+          <input type="file" id="res-file" />
+          <button id="upload-res-btn">Upload</button>
+        </div>
+        <ul id="resources-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/app.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
