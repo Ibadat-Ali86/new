@@ -1,0 +1,56 @@
+:root{
+  --bg: #0b1020;
+  --card: rgba(255,255,255,0.08);
+  --text: #e7ecff;
+  --muted: #a3b0d0;
+  --primary-start: #3B82F6;
+  --primary-end: #8B5CF6;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --shadow: rgba(0,0,0,0.3);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: Inter, ui-sans-serif, system-ui;
+  background: radial-gradient(80% 60% at 20% 10%, rgba(59,130,246,0.25), transparent),
+              radial-gradient(60% 40% at 80% 20%, rgba(139,92,246,0.25), transparent),
+              var(--bg);
+  color:var(--text);
+}
+.page{max-width:1100px;margin:0 auto;padding:24px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.header h1{font-weight:800;letter-spacing:0.2px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+.card{
+  grid-column: span 12;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border-radius:16px; padding:20px; box-shadow: 0 8px 28px var(--shadow);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{transform: translateY(-2px); box-shadow:0 12px 40px var(--shadow)}
+
+@media(min-width:840px){
+  #summary-card{grid-column: span 12}
+  #goals-card{grid-column: span 6}
+  #resources-card{grid-column: span 6}
+}
+
+input,button{font:inherit}
+input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:var(--text)}
+button{padding:10px 14px;border:none;border-radius:10px;background:linear-gradient(90deg,var(--primary-start),var(--primary-end));color:#fff;font-weight:600;cursor:pointer;box-shadow:0 6px 16px rgba(59,130,246,0.35);transition: transform .08s ease}
+button:active{transform:scale(0.98)}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.2)}
+.row{display:flex;gap:10px;margin-top:10px}
+.muted{color:var(--muted);font-size:14px;margin-top:8px}
+
+.kpis{display:flex;gap:16px}
+.kpi{background:rgba(0,0,0,0.15);padding:14px;border-radius:12px;min-width:120px;text-align:center}
+.kpi span{display:block;font-size:28px;font-weight:800}
+
+ul{list-style:none;padding:0;margin:10px 0}
+li{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(255,255,255,0.06);border-radius:10px;margin-bottom:8px}
+li .title{font-weight:600}
+li .actions{display:flex;gap:8px}
