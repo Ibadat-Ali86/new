@@ -36,11 +36,15 @@ def create_app() -> Flask:
     from .goals.routes import bp as goals_bp
     from .resources.routes import bp as resources_bp
     from .analytics.routes import bp as analytics_bp
+    from .reminders.routes import bp as reminders_bp
+    from .reports.routes import bp as reports_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/v1/auth")
     app.register_blueprint(goals_bp, url_prefix="/api/v1/goals")
     app.register_blueprint(resources_bp, url_prefix="/api/v1/resources")
     app.register_blueprint(analytics_bp, url_prefix="/api/v1/analytics")
+    app.register_blueprint(reminders_bp, url_prefix="/api/v1/reminders")
+    app.register_blueprint(reports_bp, url_prefix="/api/v1/reports")
 
     @app.after_request
     def _set_headers(response):
