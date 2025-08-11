@@ -622,6 +622,62 @@ class DataManager {
         this.saveNotifications(filteredNotifications);
         return true;
     }
+    
+    // Reminders Management
+    getReminders() {
+        return Utils.getItem('userReminders', []).filter(reminder => 
+            reminder.userId === this.authManager.currentUser?.id
+        );
+    }
+
+    saveReminders(reminders) {
+        Utils.setItem('userReminders', reminders);
+    }
+
+    addReminder(reminderData) {
+        const reminders = Utils.getItem('userReminders', []);
+        const newReminder = {
+            id: Utils.generateId(),
+            userId: this.authManager.currentUser.id,
+            ...reminderData,
+            createdAt: new Date().toISOString()
+        };
+        
+        reminders.push(newReminder);
+        this.saveReminders(reminders);
+        
+        return newReminder;
+    }
+
+    updateReminder(reminderId, updates) {
+        const reminders = Utils.getItem('userReminders', []);
+        const reminderIndex = reminders.findIndex(r => r.id === reminderId);
+        
+        if (reminderIndex !== -1) {
+            reminders[reminderIndex] = {
+                ...reminders[reminderIndex],
+                ...updates,
+                updatedAt: new Date().toISOString()
+            };
+            
+            this.saveReminders(reminders);
+            return reminders[reminderIndex];
+        }
+        
+        return null;
+    }
+
+    deleteReminder(reminderId) {
+        const reminders = Utils.getItem('userReminders', []);
+        const filteredReminders = reminders.filter(r => r.id !== reminderId);
+        
+        if (filteredReminders.length !== reminders.length) {
+            this.saveReminders(filteredReminders);
+            return true;
+        }
+        
+        return false;
+    }
 
     // Search and Filter
     searchGoals(query, filters = {}) {

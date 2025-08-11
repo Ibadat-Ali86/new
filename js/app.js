@@ -67,8 +67,9 @@ class LearnFlowApp {
         this.managers.goals = new GoalsManager(this.managers.data);
         this.managers.resources = new ResourcesManager(this.managers.data);
         this.managers.notifications = new NotificationsManager(this.managers.data);
+        this.managers.reminders = new RemindersManager(this.managers.data);
+        this.managers.reports = new ReportsManager(this.managers.data);
         this.managers.charts = new ChartsManager();
-        this.managers.calendar = new CalendarManager(this.managers.data);
         
         // Expose managers globally for easy access
         window.dataManager = this.managers.data;
@@ -76,8 +77,9 @@ class LearnFlowApp {
         window.goalsManager = this.managers.goals;
         window.resourcesManager = this.managers.resources;
         window.notificationsManager = this.managers.notifications;
+        window.remindersManager = this.managers.reminders;
+        window.reportsManager = this.managers.reports;
         window.chartsManager = this.managers.charts;
-        window.calendarManager = this.managers.calendar;
     }
 
     // Initialize UI event listeners
@@ -509,8 +511,11 @@ class LearnFlowApp {
             case 'progress':
                 this.loadProgressData();
                 break;
-            case 'calendar':
-                this.managers.calendar.renderCalendar();
+            case 'reminders':
+                this.managers.reminders.renderReminders();
+                break;
+            case 'reports':
+                this.managers.reports.renderReports?.();
                 break;
             case 'profile':
                 this.loadProfileData();
@@ -564,6 +569,16 @@ class LearnFlowApp {
         
         // Generate streak calendar
         this.managers.charts.generateStreakCalendar();
+    }
+    
+    // Generate report
+    generateReport(type) {
+        this.managers.reports.generateReport(type);
+    }
+    
+    // Export data
+    exportData(format) {
+        this.managers.reports.exportData(format);
     }
 
     // Load profile data
